@@ -1,6 +1,7 @@
+
 /*
 
-com.ukp.shedule.exercise;
+package  com.ukp.shedule.exercise;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -19,6 +20,8 @@ public class ApplicationProd extends SpringBootServletInitializer {
 
 
 
+
 /**
  * Start point for production App (Tomcat 9)
  */
+
