@@ -20,3 +20,19 @@ export class PnDaynamesDto {
     days: string;
 
 }
+
+/*export class RoutineListsDto{
+    lists: RoutineDto[];
+
+}*/
+
+export class RsHolder{
+    id : number;
+    str : string;
+
+    constructor(id: number, str: string) {
+        this.id = id;
+        this.str = str;
+    }
+}
+

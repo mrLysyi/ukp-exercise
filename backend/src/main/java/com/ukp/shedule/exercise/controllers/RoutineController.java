@@ -60,9 +60,9 @@ public class RoutineController {
 
 
     @GetMapping("/unitedlist/all")
-    public ResponseEntity<RoutineListsDto> getAllRoutineUnited(){
+    public ResponseEntity<List<List<RoutineDto>>> getAllRoutineUnited(){
         RoutineListsDto resp = routineService.findAlldUnitedShedule();
-        return new ResponseEntity<>(resp, HttpStatus.OK);
+        return new ResponseEntity<>(resp.getLists(), HttpStatus.OK);
     }
 
 

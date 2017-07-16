@@ -10,6 +10,10 @@
                 <div *ngIf="routineResults[0]?.id">
                     {{formatSheduleString(routineResults)}}
                 </div>
+                <hr>
+                <div *ngFor="let str of cleanStr">
+                    {{str.str}}
+                </div>
                 <!--<div *ngFor="let routineResult of routineResults">
                      {{routineResult.pnDaynamesByDayofweek.name}}
                     {{routineResult.pnDaynamesPeriodTo?.name}}
