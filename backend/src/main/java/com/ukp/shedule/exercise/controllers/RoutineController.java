@@ -3,6 +3,7 @@ package com.ukp.shedule.exercise.controllers;
 import com.ukp.shedule.exercise.dao.PnDaynamesDao;
 import com.ukp.shedule.exercise.dao.RoutineDao;
 import com.ukp.shedule.exercise.dto.RoutineDto;
+import com.ukp.shedule.exercise.dto.RoutineListsDto;
 import com.ukp.shedule.exercise.services.RoutineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,10 +54,16 @@ public class RoutineController {
         List<RoutineDto> respList = routineService.findAllByIdUnitedShedule(id);
         if (respList.size() == 0)
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        routineService.findAllByIdUnitedShedule(id); //TEST
         return new ResponseEntity<>(respList, HttpStatus.OK);
     }
 
+
+
+    @GetMapping("/unitedlist/all")
+    public ResponseEntity<RoutineListsDto> getAllRoutineUnited(){
+        RoutineListsDto resp = routineService.findAlldUnitedShedule();
+        return new ResponseEntity<>(resp, HttpStatus.OK);
+    }
 
 
 }

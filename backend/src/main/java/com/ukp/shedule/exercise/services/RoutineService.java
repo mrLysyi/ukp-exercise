@@ -5,6 +5,7 @@ import com.ukp.shedule.exercise.dao.PnDaynamesDao;
 import com.ukp.shedule.exercise.dao.RoutineDao;
 import com.ukp.shedule.exercise.domains.RoutineEntity;
 import com.ukp.shedule.exercise.dto.RoutineDto;
+import com.ukp.shedule.exercise.dto.RoutineListsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +57,8 @@ public class RoutineService {
         }
         dtoList = entityList.stream()
                 .map(routineEntity -> new RoutineDto(routineEntity))
-                .sorted(Comparator.comparingInt(p -> p.getIdOrigin()))
+                .sorted(Comparator.comparingInt(p -> p.getIdOrigin())) //.sorted(Comparator.comparingInt(p -> p.getPnDaynamesByDayofweek().getOrderby()))
+
                 .collect(Collectors.toList());
         return dtoList;
     }
@@ -75,8 +77,20 @@ public class RoutineService {
         List<RoutineDto> dtoList = findAllById(id);
 
         if (dtoList.size() > 1) {
+            dtoList = formatUnionShedule(dtoList);
+        }
 
-            final ListIterator<RoutineDto> iter = dtoList.listIterator();
+
+        return dtoList;
+    }
+
+    public RoutineListsDto findAlldUnitedShedule() {
+        List<RoutineDto> dtoList = this.findAll();
+        return new       RoutineListsDto();
+    }
+
+    private List<RoutineDto> formatUnionShedule( List<RoutineDto> list){
+            final ListIterator<RoutineDto> iter = list.listIterator();
             RoutineDto next = iter.next();
             RoutineDto baseNode = next; //node for "appending"  setPnDaynamesPeriodTo
             RoutineDto prev = next;
@@ -98,9 +112,6 @@ public class RoutineService {
                 }
                 prev = next;
             }
-        }
-
-
-        return dtoList;
+        return list;
     }
 }

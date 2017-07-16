@@ -1,19 +1,46 @@
 <button class="btn btn-danger btn-outline-danger " (click)='resetView()'>clear</button>
-<br>
 
 
-<div id="inputModelData" class="row">
-     <div ngbDropdown #myDrop2="ngbDropdown" class="col-md-2 col-md-offset-5">
-        <button class="btn btn-outline-info" id="dropdownMenu2" ngbDropdownToggle>id відділення: {{selectedId}}</button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button class="btn btn-info btn-outline-info " *ngFor="let routineRaw of routineRaws"
-                    (click)="selectRoutineId(routineRaw.id)"> {{routineRaw.id}}
-            </button>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+
+
+            <div class="container">
+                <div *ngIf="routineResults[0]?.id">
+                    {{formatSheduleString(routineResults)}}
+                </div>
+                <!--<div *ngFor="let routineResult of routineResults">
+                     {{routineResult.pnDaynamesByDayofweek.name}}
+                    {{routineResult.pnDaynamesPeriodTo?.name}}
+                </div>-->
+            </div>
+
+
+            <br> <br>
+            <hr>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card-block">
+                <div id="inputModelData">
+                    <div ngbDropdown #myDrop2="ngbDropdown" class="col-md-2 col-md-offset-5">
+                        <button class="btn btn-outline-info" id="dropdownMenu2" ngbDropdownToggle
+                                (click)="getRawRoutine()">
+                            id
+                            відділення: {{selectedId}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="btn btn-info btn-outline-info " *ngFor="let routineRaw of routineRaws"
+                                    (click)="selectRoutineById(routineRaw.id)"> {{routineRaw.id}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
-
-<div *ngFor="let routineResult of routineResults">
-    {{routineResult.pnDaynamesByDayofweek.name}}
-    {{routineResult.pnDaynamesPeriodTo?.name}}
 </div>

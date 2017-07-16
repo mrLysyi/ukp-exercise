@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import {AppComponent } from './app.component';
 import {AlertService} from "./services/alert.service";
 import {Router} from "@angular/router";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -12,13 +12,15 @@ import {FAQsComponent} from "./content/FAQs/faqs.component";
 import {HomeComponent} from "./content/home/home.component";
 import {PageNotFoundComponent} from "./routing/not-found.component";
 import {RestService} from "./services/rest.service";
+import {AlertComponent} from "./shared/alert/alert.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     FAQsComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AlertComponent
   ],
   imports: [
     NgbModule.forRoot(),
@@ -30,6 +32,7 @@ import {RestService} from "./services/rest.service";
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule
+
   ],
   providers: [AlertService, RestService],
   bootstrap: [AppComponent]
