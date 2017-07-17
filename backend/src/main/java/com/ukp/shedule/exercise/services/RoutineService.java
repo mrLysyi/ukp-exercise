@@ -82,8 +82,8 @@ public class RoutineService {
     }
 
     public RoutineListsDto findAlldUnitedShedule() {
-        RoutineListsDto respList = new RoutineListsDto(new LinkedList<>());
-        List<RoutineDto> dtoListDirty = this.findAll();
+       RoutineListsDto respList = new RoutineListsDto(new LinkedList<>());
+   /*     List<RoutineDto> dtoListDirty = this.findAll();       // hardcode, works
         Set<Integer> ids = new TreeSet<>();
         for (int q=0; q<dtoListDirty.size(); q++) {
             ids.add(dtoListDirty.get(q).getId());
@@ -92,11 +92,34 @@ public class RoutineService {
 
         while(it.hasNext()){
             respList.appendList(this.findAllByIdUnitedShedule((Integer)it.next()));
+        }*/
+
+    Map<Integer, List<RoutineDto>> map = new TreeMap<>(); // fill treeSet
+    List<RoutineDto> dtoListRaw = this.findAll();
+    for(int i=0 ; i < dtoListRaw.size(); i++ ){
+       Integer key = dtoListRaw.get(i).getId();
+        if(map.containsKey(key)){
+            List<RoutineDto> tempList = map.get(key);
+            tempList.add(dtoListRaw.get(i));
+        } else{
+            List<RoutineDto> newList = new LinkedList<>();
+            newList.add(dtoListRaw.get(i));
+            map.put(key, newList);
+        }
+    }
+
+        for(Map.Entry e : map.entrySet()){
+            System.out.println(e.getKey()+" "+ e.getValue());
+            List<RoutineDto> litleList = (List<RoutineDto>) e.getValue();
+            litleList = litleList.stream() // sort as Days orderBy it
+                    .sorted(Comparator.comparingInt(p -> p.getPnDaynamesByDayofweek().getOrderby()))
+                    .collect(Collectors.toList());
+            respList.appendList(this.formatUnionShedule(litleList));
         }
 
 
-/*        List<RoutineDto> dtoList = this.findAll(); // sorted by id
 
+/*        List<RoutineDto> dtoList = this.findAll(); // sorted by id  Didn't works properly
 
         dtoList = dtoList.stream() // sort as Days orderBy it
                 .sorted(Comparator.comparingInt(p -> p.getPnDaynamesByDayofweek().getOrderby()))
