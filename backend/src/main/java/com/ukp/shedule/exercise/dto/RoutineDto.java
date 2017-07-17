@@ -13,13 +13,13 @@ public class RoutineDto {
     @NotNull(message = "error.id.routine.notnull")
     private int id; // can by duplicated in DB
 
-    @JsonFormat(pattern="HH:00")
+    @JsonFormat(pattern="HH:mm")
     private Timestamp workfrom;
-    @JsonFormat(pattern="HH:00")
+    @JsonFormat(pattern="HH:mm")
     private Timestamp workto;
-    @JsonFormat(pattern="HH:00")
+    @JsonFormat(pattern="HH:mm")
     private Timestamp intervalfrom;
-    @JsonFormat(pattern="HH:00")
+    @JsonFormat(pattern="HH:mm")
     private Timestamp intervalto;
 
     private PnDaynamesEntity pnDaynamesByDayofweek; // convert to DTO !
